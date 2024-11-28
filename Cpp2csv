@@ -1,0 +1,41 @@
+# Input .cpp file
+input_file = 'your_file.cpp'
+
+# Output CSV file
+output_file = 'assignments.csv'
+
+Open the .cpp file
+with open (input_file, 'r') as file:
+cpp_code = file. readlines ()
+Prepare a list to hold the extracted assignments
+assignments = []
+# Process each line of the .cpp file
+for line in cpp_code:
+# Strip the line to remove extra spaces and newlines
+line line.strip()
+# Skip empty lines and comments
+if not line or line. startsvith("//") or line. startsvith("/*"):
+continue
+# Match the assignment pattern
+match = re.search (assignment_pattern, line)
+if match:
+D
+# If a regular assignment is found (standard LHS
+if match.group(1) :
+= RHS)
+I
+lhs = match. group (1).strip () # Left-hand side (variable name, array, or struct member)
+rhs = match. group (2).strip () # Right-hand side (expression, function call, etc.)
+assignments.append([lhs, rhs])
+# If a compound assignment is found (e.g., += = *=)
+elif match.group(3):
+lhs = match. group (3). strip () # Left-hand side (variable name, array, or struct member)
+operator = match. group (4).strip () # Compound assignment operator
+rhs = match.group (5).strip () # Right-hand side (expression, function call, etc.)
+assignments.append([lhs + " " + operator, rhs])
+# Write the assignments to a CSV file
+with open (output_file, mode='w', newline='') as csvfile:
+writer = csv, vriter (csv file)
+writer.writerov (['LHS', 'RHS']) # Write the header row
+writer.writerovs (assignments) # Write the extracted assignments
+print (f"Assignments extracted to (output_file}")
